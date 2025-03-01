@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta</title>
+    <link rel="stylesheet" href="love_letter.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background: #ff4d4d;
+            border: 2px solid #cc0000;
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+        .envelope::before, .envelope::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #ff4d4d;
+            border: 2px solid #cc0000;
+            transition: transform 0.3s;
+        }
+        .envelope::before {
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 100px solid #ff4d4d;
+            top: -50px;
+            left: 0;
+        }
+        .envelope::after {
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid #ff4d4d;
+            bottom: -50px;
+            left: 0;
+        }
+        .message-top {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            color: white;
+        }
+        .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 45px;
+            background-color: red;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+            animation: heartbeat 1s infinite;
+        }
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+        .questions {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .question {
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .buttons button:first-child {
+            color: black;
+        }
+        .message {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: rgb(12, 12, 12);
+        }
+        .love-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: rgb(13, 14, 13);
+            text-align: center;
+        }
+        .disappointment-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: rgb(14, 13, 13);
+            text-align: center;
+        }
+        .small-text {
+            font-size: 12px;
+            color: gray;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .background {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://th.bing.com/th?id=OIP.RGQaXDSVyr5nyfgjT7jF3gHaFP&w=297&h=210&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'); /* Replace with the actual URL */
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="background" id="background"></div>
+    <div class="envelope" onclick="showQuestions()">
+        <div class="message-top"></div>
+        <div class="heart"></div>
+    </div>
+    <div class="questions">
+        <div class="question">
+            <p>¿Me llamas la atención, te gustaría que nos conociéramos?</p>
+            <div class="buttons">
+                <button onclick="answerYes()">Sí</button>
+                <button onclick="answerNo()">No</button>
+            </div>
+            <div class="small-text">cuando respondas la pregunta podrias mandarme tu respuesta por WhatsApp?.</div>
+        </div>
+    </div>
+    <div class="love-message" id="loveMessage">
+      que bien no estare guapo,mamado pero se querer bonito y ser detallista
+    </div>
+    <div class="disappointment-message" id="disappointmentMessage">
+    que mal pero no pasa nada.
+    </div>
+    
+    <script>
+        function showQuestions() {
+            document.querySelector('.envelope').style.display = 'none';
+            document.querySelector('.questions').style.display = 'flex';
+            document.getElementById('background').style.display = 'block';
+        }
+        function answerYes() {
+            document.querySelector('.questions').style.display = 'none';
+            document.getElementById('loveMessage').style.display = 'block';
+        }
+        function answerNo() {
+            document.querySelector('.questions').style.display = 'none';
+            document.getElementById('disappointmentMessage').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
